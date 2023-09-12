@@ -1,10 +1,8 @@
 import React from 'react';
 import { FaBeer } from 'react-icons/fa';
 
-const Blog = ({blog}) => {
+const Blog = ({blog, handleBookmarks}) => {
     const {title, cover, id, posted_date, author, author_img, reading_time, hashtags } = blog
-
-    console.log (hashtags)
     
     return (
         <div>
@@ -19,7 +17,7 @@ const Blog = ({blog}) => {
                 </div>
                 <div className='flex gap-3 items-center '>
                     <span>{reading_time} minit</span>
-                    <span className='text-red-500'><FaBeer></FaBeer></span>
+                    <span onClick={()=>handleBookmarks(blog)} className='text-red-500'><FaBeer></FaBeer></span>
                     
                 </div>
             </div>
