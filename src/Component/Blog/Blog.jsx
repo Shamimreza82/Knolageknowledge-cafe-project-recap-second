@@ -1,7 +1,7 @@
-import React from 'react';
 import { FaBeer } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
-const Blog = ({blog, handleBookmarks}) => {
+const Blog = ({blog, handleBookmarks, handleMarkRead}) => {
     const {title, cover, id, posted_date, author, author_img, reading_time, hashtags } = blog
     
     return (
@@ -24,14 +24,22 @@ const Blog = ({blog, handleBookmarks}) => {
             <h1 className='text-2xl font-bold my-3'>{title}</h1>
             <p>
                 {
-                    hashtags.map(hash=> <span className='mr-5'>#{hash}</span>)
+                    hashtags.map((hash, idx)=> <span key={idx}  className='mr-5'>#{hash}</span>)
                 }
             </p>
-            <p className='mb-8 border-b-2 text-red-500 underline'>Mark as read</p>
+            <p onClick={()=> handleMarkRead(reading_time, id )} className='mb-8 border-b-2 text-red-500 underline'>Mark as read</p>
             
             
         </div>
     );
 };
+
+
+Blog.propType = {
+    blog: PropTypes.object.isRequired,
+    handleBookmarks: PropTypes.func,
+    handleMarkRead: PropTypes.func
+}
+
 
 export default Blog;

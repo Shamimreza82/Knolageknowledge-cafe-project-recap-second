@@ -7,12 +7,18 @@ import { useState } from "react";
 function App() {
 
   const [bookmarks, setBookmarks] = useState([])
+  const [markRead, setMarkRead] = useState (0)
 
   const handleBookmarks = (bookmark) => {
     const newBookmarks = [...bookmarks, bookmark]
     setBookmarks(newBookmarks)
   }
 
+  const handleMarkRead = (readingMark, id) => {
+    setMarkRead (markRead + readingMark)
+   const removeBookmark = bookmarks.filter(remove => remove.id !== id)
+   setBookmarks(removeBookmark);
+  }
 
 
   return (
@@ -20,9 +26,13 @@ function App() {
       <Header></Header>
       <div className="lg:flex">
         <div className="flex justify-center lg:w-3/4 bg-slate-100">
-             <Blogs handleBookmarks = {handleBookmarks}></Blogs>
+             <Blogs 
+             handleMarkRead = {handleMarkRead}
+             handleBookmarks = {handleBookmarks}></Blogs>
         </div>
-            <Bookmarks bookmarks = {bookmarks}></Bookmarks>
+            <Bookmarks
+            markRead = {markRead}
+            bookmarks = {bookmarks}></Bookmarks>
       </div>
     </main>
   );
